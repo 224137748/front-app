@@ -22,7 +22,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/axios'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -31,13 +32,14 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module'
+    // '@nuxtjs/eslint-module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -46,5 +48,14 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: [/^element-ui/]
+  },
+  proxy: {
+    '/api/': {
+      target: 'http://localhost:7001',
+      secure: false,
+      pathRewrite: {
+        '^/api': ''
+      }
+    }
   }
-}
+};
