@@ -34,7 +34,7 @@
         <el-input type="password" v-model="form.repasswd" placeholder="请再次输入密码" />
       </el-form-item>
 
-      <el-form-item prop="repasswd" label="确认密码">
+      <el-form-item label="确认密码">
         <el-button type="primary" @click.native.prevent="handleRegister">注册</el-button>
       </el-form-item>
     </el-form>
@@ -102,7 +102,8 @@ export default {
               },
             });
           } else {
-            this.$message.error(ret.message);
+            console.log(ret);
+            this.$message.error(ret.message ?? "接口请求错误");
           }
         } else {
           console.log("校验失败");
